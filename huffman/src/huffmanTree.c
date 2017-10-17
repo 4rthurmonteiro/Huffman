@@ -4,9 +4,11 @@
 
 struct _huffmanTree {
 
-	short int size;
+	//short int size;
+	void *size;
 
-	short int nodes;
+	//short int nodes;
+	void *nodes;
 
 	node_t *head;
 
@@ -18,8 +20,13 @@ huffmanTree_t *createBinaryTree(){
 	huffmanTree_t *new_huff = (huffmanTree_t *) malloc(sizeof(huffmanTree_t));
 
 
-	new_huff->size = 0;
-	new_huff->nodes = 0;
+	new_huff->size = malloc(sizeof(short int));
+	short int aux = 0;
+	memcpy(new_huff->size, &aux, sizeof(short int));
+
+	new_huff->nodes = malloc(sizeof(short int));
+  short int aux2 = 0;
+	memcpy(new_huff->nodes, &aux2, sizeof(short int));
 
 	new_huff->head = NULL;
 	new_huff->tail = NULL;
@@ -55,7 +62,7 @@ short int numberOfNodes(huffmanTree_t *tree){
 
 	if (tree != NULL) {
 
-		return tree->nodes;
+		return (*(short int*)tree->nodes);
 	} else {
 
 		return -1;
@@ -78,7 +85,7 @@ void add(huffmanTree_t *tree, node_t *to_add)
 
 	if (tree != NULL && to_add != NULL) {
 
-		if (tree->size == 0) {
+		if ((*(int*)tree->size) == 0) {
 			tree->head = to_add;
 			tree->tail = to_add;
 		} else {
@@ -120,9 +127,16 @@ void add(huffmanTree_t *tree, node_t *to_add)
 			}
 		}
 
+		short int intSize = (*(short int*)tree->size);
+		intSize++;
 
-		tree->size++;// vai dar pau
-		tree->nodes++;//vai dar pau
+		memcpy(tree->size, &intSize, sizeof(short int));
+		//tree->size++;// vai dar pau
+
+		short int intNodes = (*(short int*)tree->nodes);
+		intNodes++;
+		memcpy(tree->nodes, &intNodes, sizeof(short int));
+		//tree->nodes++;//vai dar pau
 	}
 }
 
@@ -130,7 +144,7 @@ void forest(huffmanTree_t *tree){
 
 	if (tree != NULL) {
 
-		while (tree->size > 1) {
+		while ((*(int*)tree->size) > 1) {
 
 			node_t *left = getMin(tree);
 			node_t *right = getMin(tree);
@@ -152,7 +166,7 @@ void forest(huffmanTree_t *tree){
 node_t *getMin(huffmanTree_t *tree){
 
 	if (tree != NULL) {
-		if (tree->size == 0) {
+		if ((*(int*)tree->size) == 0) {
 
 			return NULL;
 		} else {
@@ -161,9 +175,13 @@ node_t *getMin(huffmanTree_t *tree){
 
 			tree->head = next(tree->head);
 
-			tree->size--;
+			short int intSize = (*(short int*)tree->size);
+			intSize--;
 
-			if (tree->size != 0) {
+			memcpy(tree->size, &intSize, sizeof(short int));
+//			tree->size--;
+
+			if ((*(short int*)tree->size) != 0) {
 
 				previouSet(tree->head, NULL);
 			} else {
@@ -187,7 +205,7 @@ void setLeaf(huffmanTree_t *tree){
 
 	if (tree != NULL) {
 
-		if (tree->nodes == 1) {
+		if ((*(short int*)tree->nodes) == 1) {
 
 			representationSet(tree->head, "0");
 		} else {

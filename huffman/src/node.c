@@ -32,10 +32,12 @@ node_t *createNode(unsigned char item, unsigned long long int frequency, node_t 
 	new_node->item = item;
 	new_node->frequency = frequency;
 	new_node->representation = NULL;
+
   new_node->height = malloc(sizeof(int));
   int aux = MAX(height(left), height(right)) + 1;
   memcpy(new_node->height, &aux, sizeof(int));
-	new_node->previous = NULL;
+
+  new_node->previous = NULL;
 	new_node->next = NULL;
 	new_node->left = left;
 	new_node->right = right;
@@ -234,7 +236,7 @@ void saveNode(node_t *node, FILE *dest){
 	if (node != NULL) {
 
 		if (!isLeaf(node) || (node->item != AUX && node->item != ESC)) {
-	
+
 			fwrite(&node->item, sizeof(unsigned char), 1,	dest);
 		} else {
 

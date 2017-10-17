@@ -21,6 +21,8 @@ void descompress(char *to_decode_name){
 
 			huffmanTree_t *tree = createBinaryTree();
 
+			char *decoded_name = (char *) calloc(strlen(to_decode_name),sizeof(char));
+
 			strcpy(decoded_name, to_decode_name);
 
 

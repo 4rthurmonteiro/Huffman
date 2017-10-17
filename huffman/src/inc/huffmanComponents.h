@@ -7,6 +7,8 @@
 
 #define HUFFMANCOMPONETS_H
 
+#define PACKED __attribute__((packed))
+
 /*  Define o caracter escape.
 */
 #define ESC '\\'
