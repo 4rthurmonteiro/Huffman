@@ -7,17 +7,15 @@
 
 #define HUFFMANCOMPONETS_H
 
-#define PACKED __attribute__((packed))
-
-/*  Define o caracter escape.
+/*  Define the escape character.
 */
 #define ESC '\\'
 
-/*  Define o caracter auxiliar.
+/*  Define the auxiliary character.
 */
 #define AUX '*'
 
-/* Macro que retorna o maior valor.
+/* Macro that returns the highest value.
  */
 #define MAX(x, y) ((x > y)? x : y)
 
