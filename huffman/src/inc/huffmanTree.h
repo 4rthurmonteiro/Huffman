@@ -45,12 +45,19 @@ node_t *root(huffmanTree_t *);
 void add(huffmanTree_t *, node_t *);
 
 /*
-    
+    Transform a "tree linked list" in a strictly binary tree, like the huffman algorithm demands.
+    Input: The tree (huffmanTree_t *) which still is a linked list.
+    Output: If the tree is NULL the function does nothing and if the tree is already a strictly binary tree,
+    it creates another node root increasing the depth of the tree.
+    Return nothing because is a void function.
 */
 void forest(huffmanTree_t *);
 
 /*
-
+   Returns the node of a tree, that still is a linked list, which the item has the lowest
+   frequency and removes the node from the list.
+   Input: The tree (huffmanTree_t *) which is desired to remove the node with the lowest frequency.
+   Output: If the tree passed is NULL or is empty returns NULL else returns de node with de lowest frequency and remove from the tree.
 */
 node_t *getMin(huffmanTree_t *);
 
