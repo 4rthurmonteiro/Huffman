@@ -4,6 +4,9 @@
 
 #define HUFFMANTREE_H
 
+/*
+  Define the huffman tree type.
+*/
 
 typedef struct _huffmanTree huffmanTree_t;
 
