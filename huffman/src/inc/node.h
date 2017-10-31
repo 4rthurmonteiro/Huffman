@@ -114,14 +114,27 @@ node_t *right(node_t *);
 
 /*
   If the node is a leaf, it sets the new code with a string else calls this function
-  recursively to 
+  recursively to your children with the same code put adding "0" or "1".
+  Input: The node (node_t *) which the item will have the new code in the string.
+  Output: If one of the arguments passed is NULL, the function does nothing else
+  else set the new code representation.
+  Returns nothing because is a void function.
 */
 void setNode(node_t *, char *);
 
-
+/*
+   Saves the item of a node to a file and calls recursively to the childen of this node.
+   Input: The node (node_t *) which the item will be saved to a file and the file (FILE *).
+   Output: If the node passed is NULL the function does nothing else save the item to a file.
+   Returns nothing because is a void function.
+*/
 void saveNode(node_t *, FILE *);
 
-
+/*
+   Returns a node which the item and the items of the childen were taken from a file.
+   Input: The file (FILE *) which contains the items of the node and the children.
+   Output: Return NULL if the file passed is NULL else returns the node.
+*/
 node_t *getNode(FILE *);
 
 #endif
