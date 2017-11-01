@@ -1,100 +1,119 @@
 #include "inc/compress.h"
 
+void compress(char *toCompressFile){ // Enter with the file to be compressed.
+
+	if (toCompressFile != NULL) { // check if the file is valid.
+		FILE *toCompress = NULL; // Creates toCompress file.
+		FILE *compressed = NULL; // Creates compressed file.
 
 
-void compress(char *to_encode_name){
+		toCompress = fopen(toCompressFile, "rb"); // Read the file in "rb" mode, opening non-text files, that is the binaries.
 
-	if (to_encode_name != NULL) {
-		FILE *to_encode = NULL;
-		FILE *encoded = NULL;
+		if (toCompress != NULL) { // check if the file is ok.
 
+			hashTable_t *hash = createHash(); // creates the hash table.
 
-		to_encode = fopen(to_encode_name, "rb");
+			huffmanTree_t *tree = createBinaryTree(); // creates the tree.
 
-		if (to_encode != NULL) {
-
-			hashTable_t *hash = createHash();
-
-			huffmanTree_t *tree = createBinaryTree();
-
-			char *encoded_name = (char *) calloc(strlen(to_encode_name) + 6,sizeof(char));
+			/*
+					Allocates memory to the new name of the file, with the extension ".huff" added.
+			*/
+			char *compressedFile = (char *) calloc(strlen(toCompressFile) + 6,sizeof(char));
 
 
-			strcpy(encoded_name, to_encode_name);
+			strcpy(compressedFile, toCompressFile); // Copies the source string to compressedFile.
 
-			strcat(encoded_name, ".huff");
+			strcat(compressedFile, ".huff"); // puts the huffman extension.
 
+			compressedFile[strlen(toCompressFile) + 6] = '\0'; // Cuts the string with "\0".
 
-			encoded_name[strlen(to_encode_name) + 6] = '\0';
+			compressed = fopen(compressedFile, "wb"); // Write the file in "wb" mode, writing the binaries to compressed file.
 
+			printf("\nCompressing: %s !!!\n", toCompressFile);
+			printf("\nPicking up the frequencies ...\n\n");
 
-			encoded = fopen(encoded_name, "wb");
+			getFrequency(toCompress, hash); // Catch the frequency of each byte of a file and saves it in a hash table.
+			printf("\nForming the tree...\n");
 
-			printf("\nComprimindo: %s\n", to_encode_name);
-			printf("\nPegando Frequências...\n\n");
+			hashTree(tree, hash); // Catch each item from the hash table and transforms it in a tree strictly binary tree.
+			printf("\n\tFirst Steps Ok!\n");
+			printf("\nForming Huffman Codes...\n");
 
-			getFrequency(to_encode, hash);
-			printf("\nFormando a arvore...\n");
+			setLeaf(tree); //
+			printf("\n\tHuffman Codes Ok!\n");
+			printf("\nCompressing...\n\n");
 
-			hashTree(tree, hash);
-			printf("\n\tPronto\n");
-			printf("\nFormando Códigos...\n");
+			saveCompress(toCompress, compressed, hash, tree); // Saves the file with the new codes.
+			printf("\nFile Compressed!!!!!\n\n");
 
-			setLeaf(tree);
-			printf("\n\tPronto\n");
-			printf("\nComprimindo...\n\n");
+			fclose(toCompress); //  closes the stream. All buffers are flushed.
+			fclose(compressed); //  closes the stream. All buffers are flushed.
 
-			saveCompress(to_encode, encoded, hash, tree);
-			printf("\nArquivo Comprimido com Sucesso\n\n");
+			free(compressedFile); // free memory.
 
-			fclose(to_encode);
-			fclose(encoded);
-
-			free(encoded_name);
-
-			destroyHash(&hash);
-			destroyBinaryTree(&tree);
+			destroyHash(&hash); // destroy the hash and pointer to NULL.
+			destroyBinaryTree(&tree); // destroy the tree and pointer to NULL.
 		} else {
-			printf("\nO arquivo %s não foi encontrado.\n\n", to_encode_name);
+			printf("\nThe file %s wasn't found.\n\n", toCompressFile);
 		}
 	}
 }
 
+/*
+    Catch the frequency of each byte of a file and saves it in a hash table.
+
+		MORE ABOUT THIS FUNCTION: open "compress.h" file.
+*/
 void getFrequency(FILE *src, hashTable_t *hash){
 
-	if (src != NULL && hash != NULL) {
-		unsigned char buffer;
+	if (src != NULL && hash != NULL) { // check if the arguments are valid.
+		unsigned char buffer; // the buffer which will used to reads the datas from the source.
+
+		fread(&buffer, sizeof(unsigned char), 1, src); // Reads data from src into the unsigned char buffer.
 
 
-		fread(&buffer, sizeof(unsigned char), 1, src);
+		while (!feof(src)) { // check the loop until the end-of-file.
 
+			put(hash, buffer); // Puts a item in the Hash.
 
-		while (!feof(src)) {
-
-			put(hash, buffer);
-
-			fread(&buffer, sizeof(unsigned char), 1, src);
+			fread(&buffer, sizeof(unsigned char), 1, src); // Reads the next data from src into the unsigned char buffer.
 		}
 
 
-		fseek(src, 0, SEEK_SET);
+		fseek(src, 0, SEEK_SET); // sets the file position to the beginnig of file (SEEK_SET) with offset "0".
 	}
 }
 
+
+/*
+		Catch each item from the hash table and transforms it in a tree strictly binary tree.
+
+		MORE ABOUT THIS FUNCTION: open "compress.h" file.
+*/
 void hashTree(huffmanTree_t *tree, hashTable_t *hash){
 
-	if (tree != NULL && hash != NULL) {
+	if (tree != NULL && hash != NULL) { // check if the arguments are valid.
 
-     short int i;
+    short int i; // loop aux.
+
+		/*
+			The hash table has exactly 256 elements because are the maximum number of
+			elements in the ASCII table (the possibility of differents bytes).
+		*/
 		for (i = 0; i < 256; i++) {
-
-			add(tree, get(hash, i));
+			add(tree, get(hash, i)); // Puts the node in the tree, AS LINKED LIST AND IN A ORDERED WAY.
 		}
 
-		forest(tree);
+		forest(tree); // Transform a "tree linked list" in a strictly binary tree, like the huffman algorithm demands.
 	}
 }
 
+
+/*
+    Catch the frequency of each byte of a file and saves it in a hash table.
+
+		MORE ABOUT THIS FUNCTION: open "compress.h" file.
+*/
 void saveCompress(FILE *src, FILE *dest, hashTable_t *hash, huffmanTree_t *tree){
 
 	if (src != NULL && dest != NULL && hash != NULL && tree != NULL) {
@@ -164,6 +183,11 @@ void saveCompress(FILE *src, FILE *dest, hashTable_t *hash, huffmanTree_t *tree)
 	}
 }
 
+/*
+    Catch the frequency of each byte of a file and saves it in a hash table.
+
+		MORE ABOUT THIS FUNCTION: open "compress.h" file.
+*/
 unsigned char bitSet(unsigned char base, short int i)
 {
 

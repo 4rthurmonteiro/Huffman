@@ -32,8 +32,7 @@ void getFrequency(FILE *, hashTable_t *);
 */
 void hashTree(huffmanTree_t *, hashTable_t *);
 
-/*  Salva o arquivo usando a nova codificação para cada byte.
-    Entrada: O arquivo original (FILE *), o arquivo final (FILE *), onde será salvo, a tabela hash (hashTablet_t *) que tem a nova codificação e por fim a árvore usada para gerar a nova codificação (binaryTree_t *).
+/*  
     Saves the file with the new codes.
     Input: The source file (FILE *), the huffman file (FILE *),
     the hash table (hashTable_t *) that hash the new codes and the tree used to generate the new codes.
