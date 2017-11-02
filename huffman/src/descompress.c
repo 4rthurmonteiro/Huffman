@@ -1,6 +1,5 @@
 #include "inc/descompress.h"
 
-
 void descompress(char *to_decode_name){
 
 	if (to_decode_name != NULL) {

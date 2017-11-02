@@ -1,4 +1,4 @@
-setwd(dir = "/home/arthur/Documentos/UFAL/Data_Structure/Projeto AB2/Comparation")
+setwd(dir = "/home/arthur/Documentos/UFAL/Huffman/Comparation")
 data <- read.table("file.txt")
 
 col2 <- data[,2]

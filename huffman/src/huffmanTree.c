@@ -1,7 +1,5 @@
 #include "inc/huffmanTree.h"
 
-
-
 struct _huffmanTree {
 
 	//short int size;

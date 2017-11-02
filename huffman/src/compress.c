@@ -110,81 +110,77 @@ void hashTree(huffmanTree_t *tree, hashTable_t *hash){
 
 
 /*
-    Catch the frequency of each byte of a file and saves it in a hash table.
+    Saves the file with the new codes.
 
 		MORE ABOUT THIS FUNCTION: open "compress.h" file.
 */
 void saveCompress(FILE *src, FILE *dest, hashTable_t *hash, huffmanTree_t *tree){
 
-	if (src != NULL && dest != NULL && hash != NULL && tree != NULL) {
-		unsigned char buffer;
+	if (src != NULL && dest != NULL && hash != NULL && tree != NULL) { // check if the arguments are valid.
+		unsigned char buffer; // the buffer which will used to reads the datas from the source.
 
+		unsigned short int header = 0; // header of the huffman, the first two bytes.
 
-		unsigned short int header = 0;
+		unsigned short int data = 0; // byte which will be saved in the output file.
 
-		unsigned short int data = 0;
+		short int s = 8; // This controls in which bit of the Byte that will be written to the output file. Also get the amount of "bits trash".
 
-		short int s = 8;
+		fwrite(&header, sizeof(unsigned short int), 1, dest); // Writes two bytes to the header.
 
+		saveHuffmanTree(tree, dest); // Saves the nodes items from a tree in preorder to a file.
 
-		fwrite(&header, sizeof(unsigned short int), 1, dest);
+		fread(&buffer, sizeof(unsigned char), 1, src); // Reads the first byte from src into the unsigned char buffer.
 
+		while (!feof(src)){ // check the loop until the end-of-file.
 
-		saveHuffmanTree(tree, dest);
+			char *tmp = representation(get(hash, buffer)); //  Takes the representation from the hash table node, temp is the byte which was read.
 
+      short int i; // loop aux.
 
-		fread(&buffer, sizeof(unsigned char), 1, src);
-
-
-		while (!feof(src)) {
-
-			char *tmp = representation(get(hash, buffer));
-
-
-       short int i;
+			/*
+			Works in position by position of the string and "build"
+			the byte which will be saved into the output file
+			*/
 			for (i = 0; i < strlen(tmp); i++) {
 				if (tmp[i] == '1') {
 
-					data = bitSet(data, --s);
+					data = bitSet(data, --s); // Sets and go to the next.
 				} else if (tmp[i] == '0') {
 
-					--s;
+					--s; // just go to the next
 				}
 
 
-				if (s == 0) {
-					fwrite(&data, sizeof(unsigned char), 1, dest);
+				if (s == 0) { // If true the "build" was finished. So its time to save the data in the output file.
+					fwrite(&data, sizeof(unsigned char), 1, dest); // writes "data" to dest.
 
-
-					data = 0;
-					s = 8;
+					data = 0; // restart data.
+					s = 8; // restart s.
 				}
 			}
 
 
-			fread(&buffer, sizeof(unsigned char), 1, src);
+			fread(&buffer, sizeof(unsigned char), 1, src); // reads the next byte.
 		}
 
 
-		if (s != 8) {
-			fwrite(&data, sizeof(unsigned char), 1, dest);
+		if (s != 8) { // checking the last byte from the source file.
+			fwrite(&data, sizeof(unsigned char), 1, dest); // writes the last byte.
 		} else {
 
 			s = 0;
 		}
 
 
-		fseek(dest, 0, SEEK_SET);
+		fseek(dest, 0, SEEK_SET); // goes to the beginnig of the dest file.
+		header = (s << 13 | numberOfNodes(tree)); // Define the two first bytes.
 
-		header = (s << 13 | numberOfNodes(tree));
-
-
-		fwrite(&header, sizeof(unsigned short int), 1, dest);
+		fwrite(&header, sizeof(unsigned short int), 1, dest); // puts the header in the file.
 	}
 }
 
 /*
-    Catch the frequency of each byte of a file and saves it in a hash table.
+    Shows if the byte picked was set.
 
 		MORE ABOUT THIS FUNCTION: open "compress.h" file.
 */

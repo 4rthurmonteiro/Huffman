@@ -10,11 +10,9 @@ struct _node{
 
   char *representation;
 
-
   void *height;
 
 node_t *previous;
-
 
 node_t *next;
 
