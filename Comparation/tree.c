@@ -17,7 +17,6 @@ void freeTree(node* root){
     free(root);
 }
 
-
 node *add_node(node *root, int value){
 	if (root==NULL){
         root=create_node(value);
@@ -32,9 +31,6 @@ node *add_node(node *root, int value){
 
     return root;
 }
-
-
-
 
 node *search_(node *root, int item,int* op){
 	node *temp;

@@ -50,8 +50,8 @@ int main(int argc,char* argv[])
                 number=rand()%i; //numero  aleatorio
             }
 
-            tree=add_node(tree,number);
-            avl=add_avl_node(avl,number);
+            tree=add_node(tree,number); // adiciona número na tree.
+            avl=add_avl_node(avl,number); // adiciona número na avl tree.
         }
         int* sortedNumbers= (int*) malloc(sizeof(int)*i);
         for( j=0;j<i;j++){
@@ -75,10 +75,6 @@ int main(int argc,char* argv[])
         freeTree(avl);
     }
     fclose(arq);
-
-    //pre_order(root);
-
-
 
     return 0;
 }

@@ -76,14 +76,8 @@ node* balance(node* no){
     return no;
 }
 
-
-
-
 //adiciona Node na avl
 node *add_avl_node(node *root, int value){
    root=add_node(root,value);
     return balance(root);
 }
-
-
-
