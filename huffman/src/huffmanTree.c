@@ -1,18 +1,28 @@
 #include "inc/huffmanTree.h"
 
+/*
+		The structure tree.
+
+		IMPORTANT ISSUE!!!
+
+		 Our tree at the beginnig is a linked list.
+*/
 struct _huffmanTree {
 
-	//short int size;
-	void *size;
+	void *size; // Number of items in the list.
 
-	//short int nodes;
-	void *nodes;
+	void *nodes; // Number of nodes in the list.
 
-	node_t *head;
+	node_t *head; // list head.
 
-	node_t *tail;
+	node_t *tail; // list tail.
 };
 
+/*
+    Creates a new tree.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 huffmanTree_t *createBinaryTree(){
 
 	huffmanTree_t *new_huff = (huffmanTree_t *) malloc(sizeof(huffmanTree_t));
@@ -33,6 +43,11 @@ huffmanTree_t *createBinaryTree(){
 	return new_huff;
 }
 
+/*
+    Destroy the tree and sets to NULL.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 void destroyBinaryTree(huffmanTree_t **tree){
 
 	if ((*tree) != NULL) {
@@ -56,6 +71,11 @@ void destroyBinaryTree(huffmanTree_t **tree){
 	}
 }
 
+/*
+    Returns the number of nodes of a tree.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 short int numberOfNodes(huffmanTree_t *tree){
 
 	if (tree != NULL) {
@@ -67,6 +87,11 @@ short int numberOfNodes(huffmanTree_t *tree){
 	}
 }
 
+/*
+    Returns the root of a tree.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 node_t *root(huffmanTree_t *tree){
 
 	if (tree != NULL) {
@@ -78,6 +103,11 @@ node_t *root(huffmanTree_t *tree){
 	}
 }
 
+/*
+    Puts the node in the tree, AS LIST AND IN A ORDERED WAY.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 void add(huffmanTree_t *tree, node_t *to_add)
 {
 
@@ -138,6 +168,11 @@ void add(huffmanTree_t *tree, node_t *to_add)
 	}
 }
 
+/*
+    Transform a "tree linked list" in a strictly binary tree, like the huffman algorithm demands.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 void forest(huffmanTree_t *tree){
 
 	if (tree != NULL) {
@@ -161,6 +196,12 @@ void forest(huffmanTree_t *tree){
 	}
 }
 
+/*
+		Returns the node of a tree, that still is a linked list, which the item has the lowest
+		frequency and removes the node from the list.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 node_t *getMin(huffmanTree_t *tree){
 
 	if (tree != NULL) {
@@ -199,6 +240,11 @@ node_t *getMin(huffmanTree_t *tree){
 	}
 }
 
+/*
+    Sets the string that are the new codes of the itens of each leaf.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 void setLeaf(huffmanTree_t *tree){
 
 	if (tree != NULL) {
@@ -217,6 +263,11 @@ void setLeaf(huffmanTree_t *tree){
 	}
 }
 
+/*
+    Saves the nodes items from a tree in preorder to a file.
+
+		MORE ABOUT THIS FUNCTION: open "huffmanTree.h" file.
+*/
 void saveHuffmanTree(huffmanTree_t *tree, FILE *dest){
 
 	if (tree != NULL && dest != NULL) {
