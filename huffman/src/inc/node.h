@@ -47,7 +47,8 @@ unsigned long long int frequency(node_t *);
  */
 void freqPP(node_t *);
 
-/*  Returns the pointer to the string that contains the new code of the item of a node.
+/* 
+    Returns the pointer to the string that contains the new code of the item of a node.
     Input: The node (node_t *) which the new code of the item its necessary to know.
     Output: If is NULL returns NULL else returns the new code representation.
  */
