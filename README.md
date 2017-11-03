@@ -1,6 +1,7 @@
 # Huffman Project
 
-The huffman algorithm is used to compress files and descompress files with .huff extension. In this project was used 3 types of data structures to create this software  ;
+The huffman algorithm is used to compress files and descompress files with .huff extension. In this project was used 3 types of data structures to create this software:
+
     * Linked List.
     * Hash Table.
     * Binary Tree.
@@ -14,6 +15,9 @@ Compressing...
     At the end if the file passed is non-NULL the output file is compressed with the same name but the extension ".huff" added.
 
 Descompressing...
+   First the extesion ".huff" is cut. After that the program catch up the header (two first bytes in the input file) and separe the trash and the tree size.
+    So after that the function "getBinaryTree" is called to to build the tree with the bytes compressed.
+    To finish the program call "saveDescompress" function, this function change the codes compressed to the standard codes, so the file is decompressed with the same size before.
 
 ## Getting Started
 
