@@ -1,10 +1,7 @@
 #include "inc/descompress.h"
 #include "inc/compress.h"
 
-/*
- * Writes program help on standard output.
- */
-void print_ajuda();
+void print_ajuda(); // Shows how to use the program.
 
 int main(int argc, char *argv[]) {
 	switch (argc) {
@@ -35,10 +32,10 @@ int main(int argc, char *argv[]) {
 
 void print_ajuda()
 {
-	printf("\nForma de usar:\n\n\tbuild <modo> [<nomes>]\n\n<modo>\t\\c\tPa"
-	"ra comprimir um arquivo. Deve ser seguido de <nome>.\n\t\\d\tPara desc"
-	"omprimir um arquivo. Deve ser seguido de <nome>.\n\t\\h\tPara mostrar "
-	"essa ajuda. Não deve ser seguido de <nome>.\n\n<nomes>\tCaminho(s) rel"
-	"ativo(s) ou absoluto(s) do(s) arquivo(s) que sera(ão) comprimido(s)/de"
-	"scomprimido(s) com extensão.\n\n");
+	printf("\nInstructions:\n\n\tbuild <mode> [<names>]\n\n<mode>\t\\c\tTo"
+	" compress a file. Should be followed <name>.\n\t\\d\tTo"
+	" descompress a file. Should be followed <name>.\n\t\\h\tTo show "
+	"help function. Shouldn't be followed <name>.\n\n<names>\tFile relative addres "
+	" or file(s) absolut which will be compress/de"
+	"scompress with the extesion.\n\n");
 }
