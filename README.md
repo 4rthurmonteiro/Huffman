@@ -79,17 +79,13 @@ Example:
 
 ## Authors
 
-* **Arthur Monteiro Alves Melo** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Arthur Monteiro Alves Melo** - *Computer Engineer** - https://github.com/PurpleBooth
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Alvino Lessa** - *Computer Engineer** - https://github.com/AlvinoL
 
-* **Alvino Lessa** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Edvonaldo Horácio** - *Computer Engineer** - https://github.com/NaldoHoracio
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-* **Edvonaldo Horácio** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+"*" - In progress :). 
 
 ## License
 
