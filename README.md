@@ -79,7 +79,7 @@ Example:
 
 ## Authors
 
-* **Arthur Monteiro Alves Melo** - *Computer Engineer** - https://github.com/PurpleBooth
+* **Arthur Monteiro Alves Melo** - *Computer Engineer** - https://github.com/4rthurmonteiro
 
 * **Alvino Lessa** - *Computer Engineer** - https://github.com/AlvinoL
 
