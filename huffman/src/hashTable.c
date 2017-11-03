@@ -76,3 +76,4 @@ node_t *get(hashTable_t *hash, unsigned char item){
 		return NULL; // the hash is NULL.
 	}
 }
+ 
