@@ -15,6 +15,7 @@ Compressing...
     At the end if the file passed is non-NULL the output file is compressed with the same name but the extension ".huff" added.
 
 Descompressing...
+
    First the extesion ".huff" is cut. After that the program catch up the header (two first bytes in the input file) and separe the trash and the tree size.
     So after that the function "getBinaryTree" is called to to build the tree with the bytes compressed.
     To finish the program call "saveDescompress" function, this function change the codes compressed to the standard codes, so the file is decompressed with the same size before.
@@ -23,84 +24,73 @@ Descompressing...
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
+To use the program it's simples. Open the terminal in the paste ../huffman and run this command to see the instructions:
 
 ```
-Give examples
+./build
+```
+
+### Prerequisites
+
+To run this project it's necessary install the Clang 3-x.
+
+You can install in terminal with this commands:
+
+```
+sudo apt-get update
+sudo apt-get install clang-3.n
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+In the Huffman paste, that's contains Comparaton, Teste_CUnit and huffman, open the terminal and puts this command:
 
 ```
-Give the example
+make
 ```
 
-And repeat
+So the build software is ready to be run in the /huffman paste.
+
+## Running 
+
+Like the "Getting Started" topic you have just to do this commands:
+
+to compress:
 
 ```
-until finished
+./build c "the file addres and name with the extesion"
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Example:
 
 ```
-Give an example
+./build c /home/arthur/Downloads/ArduinoProKicad-master/ArduinoPro.kicad_pcb-bak
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+to descompress:
 ```
-Give an example
+./build d "the file addres and name with the extesion and the .huff"
 ```
 
-## Deployment
+Example:
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+```
+./build d /home/arthur/Downloads/ArduinoProKicad-master/ArduinoPro.kicad_pcb-bak.huff
+```
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Arthur Monteiro Alves Melo** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+* **Alvino Lessa** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+* **Edvonaldo Horácio** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-
